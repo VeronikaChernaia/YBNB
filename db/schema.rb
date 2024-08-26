@@ -10,8 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 0) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_26_125427) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "bookings", force: :cascade do |t|
+    t.date "check_in_date"
+    t.date "check_out_date"
+    t.float "final_price"
+    t.text "booking_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "yacht_id", null: false
+    t.index ["yacht_id"], name: "index_bookings_on_yacht_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "yacht_id", null: false
+    t.integer "rating"
+    t.text "content"
+    t.date "date_reviewed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["yacht_id"], name: "index_reviews_on_yacht_id"
+  end
+
+  create_table "yachts", force: :cascade do |t|
+    t.text "title"
+    t.text "brand"
+    t.string "price_per_hour"
+    t.string "integer"
+    t.text "description"
+    t.text "port"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "bookings", "yachts"
+  add_foreign_key "reviews", "yachts"
 end

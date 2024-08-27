@@ -1,22 +1,29 @@
 class BookingsController < ApplicationController
+  before_action :set_yacht, only: [:new, :create]
+  before_action :authenticate_user!
   def new
     @yacht = Yacht.find(params[:yacht_id])
     @booking = Booking.new
   end
 
-   # before_action :set_restaurant, only: %i[new create]
 
   def create
     @booking = Booking.new(booking_params)
     @booking.yacht = @yacht
+    @booking.user = current_user
     @booking.save
-    redirect_to yacht_path(@yacht)
+    if @booking.save!
+    redirect_to yachts_path(@yacht)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private
 
   def set_yacht
     @yacht = Yacht.find(params[:yacht_id])
+
   end
 
   def booking_params

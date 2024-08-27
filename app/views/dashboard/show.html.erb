@@ -1,0 +1,52 @@
+<div class="text-center text-black">
+<h1>My Dashboard</h1>
+</div>
+
+<div class="dashboard-container">
+
+  <div class="yachts-container">
+    <div class="text-center text-black">
+       <h2>My Yachts</h2>
+    </div>
+
+    <% if @yachts.any? %>
+
+      <div class= 'row'>
+        <% @yachts.each do |yacht| %>
+            <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= asset_path('ybnb-removebg-preview.png') %>);">
+            <h3><%= yacht.title %></h3>
+            </div>
+            <div>
+              <p>  <%= yacht.description %> </p>
+            </div>
+        <% end %>
+      </div>
+
+    <% else %>
+      <p>You have no yachts.</p>
+    <% end %>
+  </div>
+
+  <div class="bookings-container">
+    <div class="text-center text-black">
+      <h2>My Bookings</h2>
+    </div>
+    <% if @bookings.any? %>
+     <div class="row">
+
+        <% @bookings.each do |booking| %>
+            <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= asset_path('ybnb-removebg-preview.png') %>);">
+            <h3 style="margin-bottom: 10px"> Booking for: <%= booking.yacht.title %></h3>
+
+            <p style="margin-bottom: 10px">Date: <%= booking.check_in_date %></p>
+
+            <p style="margin-bottom: 10px">Status: <%= booking.booking_status %></p>
+            <%= link_to "See Details", "#", class: "btn btn-flat" %>
+          </div>
+        <% end %>
+    </div>
+    <% else %>
+      <p>You have no bookings.</p>
+    <% end %>
+  </div>
+</div>

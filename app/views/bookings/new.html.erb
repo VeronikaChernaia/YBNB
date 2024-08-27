@@ -1,0 +1,20 @@
+<h1>Book your Yacht !</h1>
+<%= simple_form_for [@yacht, @booking] do |f| %>
+  <%= f.input :check_in_date %>
+  <%= f.input :check_out_date %>
+
+ <%# <label for="yacht-select">Choose you Yacht:</label> %>
+
+<%# <select name="yachts" id="yacht-select">
+  <option value="">--Please choose an option--</option>
+  <option value="big yacht">big yacht</option>
+  <option value="little yacht">little yacht</option>
+  <option value="XXL yacht">XXL yacht</option>
+  <option value="golden yacht">golden yacht</option>
+  <option value="yacht à voile">yacht à voile</option>
+  <option value="goldfish">Goldfish</option>
+</select> %>
+
+  <h2> Your price : 1,000$ </h2>
+  <%= f.submit "Submit Booking", class: "btn btn-primary" %>
+<% end %>

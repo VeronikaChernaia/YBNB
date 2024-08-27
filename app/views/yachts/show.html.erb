@@ -1,0 +1,13 @@
+<div class="container mt-5">
+<div class="row justify-content-center">
+<div class="col-md-8">
+<h1><%= @yacht.title %></h1>
+<img src="https://cdn.boatinternational.com/convert/files/2022/07/76393b30-0096-11ed-aed3-f71d7c568098-AHPO-hero-Photography-guillaume-plisson.jpg/r%5Bwidth%5D=1920/76393b30-0096-11ed-aed3-f71d7c568098-AHPO-hero-Photography-guillaume-plisson.webp" class="w-100 my-4">
+<p>Brand: <%= @yacht.brand %></p>
+<p>Description: <%= @yacht.description %></p>
+<p>€<%= @yacht.price_per_hour %> per hour</p>
+<p>Port: <%= @yacht.port %></p>
+<%= link_to "Book", yachts_path %>
+</div>
+</div>
+</div>

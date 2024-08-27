@@ -10,13 +10,18 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.yacht = @yacht
     @booking.save
-    redirect_to yacht_path(@yacht)
+    if @booking.save!
+      redirect_to yachts_path(@yacht)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private
 
   def set_yacht
     @yacht = Yacht.find(params[:yacht_id])
+
   end
 
   def booking_params

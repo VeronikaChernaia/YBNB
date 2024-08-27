@@ -1,4 +1,4 @@
-<h1>Book your Yacht !</h1>
+<h1><b><%= @yacht.title %> </b>Booking </h1>
 <%= simple_form_for [@yacht, @booking] do |f| %>
   <%= f.input :check_in_date %>
   <%= f.input :check_out_date %>

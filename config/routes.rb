@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :views
   devise_for :users
   root to: "pages#home"
-  resources :yachts
+  resources :yachts, only: [:index, :show, :new, :create]
   resources :bookings, only: [:show, :new, :create]
 
   get 'dashboard', to: 'dashboard#show', as: 'dashboard'

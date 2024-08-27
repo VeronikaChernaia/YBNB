@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
   resources :yachts
+  resources :bookings, only: [:show, :new, :create]
+
   get 'dashboard', to: 'dashboard#show', as: 'dashboard'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

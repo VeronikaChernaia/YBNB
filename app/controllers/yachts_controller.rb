@@ -1,5 +1,4 @@
 class YachtsController < ApplicationController
-  before_action :yacht_params, only: [:new, :create]
   before_action :authenticate_user!
   def index
     @yachts = Yacht.all
@@ -14,7 +13,9 @@ class YachtsController < ApplicationController
   end
 
   def create
+
     @yacht = Yacht.new(yacht_params)
+    @yacht.user = current_user
     if @yacht.save
       redirect_to @yacht, notice: 'Yacht was successfully created.'
     else
@@ -25,6 +26,6 @@ class YachtsController < ApplicationController
   private
 
   def yacht_params
-    params.required(:yacht).permit(:title, :brand, :description, :port, :price_per_hour)
+    params.require(:yacht).permit(:title, :brand, :description, :port, :price_per_hour, :photo)
   end
 end

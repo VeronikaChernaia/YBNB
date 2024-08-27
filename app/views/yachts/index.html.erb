@@ -17,7 +17,9 @@
   <div class="row">
     <% @yachts.each do |yacht| %>
       <div class="col-12 col-sm-6 col-md-4 mb-3">
-          <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= asset_path('ybnb-removebg-preview.png') %>);">
+          <div class="card-category" data-aos="zoom-in"               style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+                       url(<%= yacht.photo.attached? ? cl_image_path(yacht.photo.key, width: 400, height: 300, crop: :fill) : asset_path('ybnb-removebg-preview.png') %>);
+                       height: 200px; background-size: cover; background-position: center;">
             <%= link_to yacht.title, yacht_path(yacht), style: "color: white; text-decoration: none;" %>
           </div>
           <h3> <%= yacht.brand %> </h3>

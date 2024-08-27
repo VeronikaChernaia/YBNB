@@ -18,10 +18,9 @@
     <% @yachts.each do |yacht| %>
       <div class="col-12 col-sm-6 col-md-4 mb-3">
           <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= asset_path('ybnb-removebg-preview.png') %>);">
-            <%= yacht.title %>
-            <%= yacht.brand %>
-            <%= yacht.price_per_hour %>
+            <%= link_to yacht.title, yacht_path(yacht), style: "color: white; text-decoration: none;" %>
           </div>
+          <h3> <%= yacht.brand %> </h3>
       </div>
     <% end %>
   </div>

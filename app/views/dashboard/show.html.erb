@@ -11,15 +11,18 @@
 
     <% if @yachts.any? %>
 
-      <div class= 'row'>
+      <div class= 'grid'>
         <% @yachts.each do |yacht| %>
+         <div>
             <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= asset_path('ybnb-removebg-preview.png') %>);">
-            <h3><%= yacht.title %></h3>
+                <h3><%= link_to yacht.title, yacht_path(yacht), style: "color: white; text-decoration: none;" %></h3>
             </div>
             <div>
               <p>  <%= yacht.description %> </p>
             </div>
+          </div>
         <% end %>
+
       </div>
 
     <% else %>
@@ -32,14 +35,14 @@
       <h2>My Bookings</h2>
     </div>
     <% if @bookings.any? %>
-     <div class="row">
+     <div class="grid">
 
         <% @bookings.each do |booking| %>
+          <div style = "card">
             <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= asset_path('ybnb-removebg-preview.png') %>);">
-            <h3 style="margin-bottom: 10px"> Booking for: <%= booking.yacht.title %></h3>
-
+              <h3 style="margin-bottom: 10px"> Booking for: <%= booking.yacht.title %></h3>
+           </div>
             <p style="margin-bottom: 10px">Date: <%= booking.check_in_date %></p>
-
             <p style="margin-bottom: 10px">Status: <%= booking.booking_status %></p>
             <%= link_to "See Details", "#", class: "btn btn-flat" %>
           </div>

@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  get 'dashboard/show'
+  #get 'dashboard/show'
   devise_for :views
   devise_for :users
   root to: "pages#home"
 
   resources :yachts do
-    resources :bookings, only: [:new, :create]
+    resources :bookings, only: [:new, :create, :show, :update]
   end
 
   get 'dashboard', to: 'dashboard#show', as: 'dashboard'

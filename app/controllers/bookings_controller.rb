@@ -1,6 +1,5 @@
 class BookingsController < ApplicationController
   before_action :set_yacht, only: [:new, :create]
-  before_action :set_booking, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
 
@@ -35,12 +34,7 @@ class BookingsController < ApplicationController
 
   private
 
-  def set_booking
-    @booking = Booking.find_by(yacht_id: params[:yacht_id], id: params[:id])
-    if @booking.nil?
-      redirect_to dashboard_path, alert: "Booking not found."
-    end
-  end
+
 
   def set_yacht
     @yacht = Yacht.find(params[:yacht_id])

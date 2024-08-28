@@ -5,8 +5,8 @@
     <div class="col-md-8">
       <h1><%= @yacht.title %></h1>
 
-      <%= cl_image_tag(@yacht.photo.key,
-      width: 400, height: 300, crop: :fill) %>
+      <%= @yacht.photo.attached? ? cl_image_tag(@yacht.photo.key,
+      width: 400, height: 300, crop: :fill) : "" %>
 
 
       <p>Brand: <%= @yacht.brand %></p>

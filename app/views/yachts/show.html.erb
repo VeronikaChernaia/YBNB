@@ -14,6 +14,8 @@
       <p>€<%= @yacht.price_per_hour %> per hour</p>
       <p>Port: <%= @yacht.port %></p>
       <%= link_to "Back to all yachts", yachts_path, class: "btn btn-flat" %>
+      <%= link_to "Edit listing", edit_yacht_path, class: "btn btn-flat" %>
+      <%= link_to "Book", new_yacht_booking_path(@yacht), class: "btn btn-flat" %>
     </div>
   </div>
 </div>

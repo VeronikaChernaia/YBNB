@@ -13,7 +13,6 @@ class YachtsController < ApplicationController
   end
 
   def create
-
     @yacht = Yacht.new(yacht_params)
     @yacht.user = current_user
     if @yacht.save
@@ -21,6 +20,16 @@ class YachtsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def edit
+    @yacht = Yacht.find(params[:id])
+  end
+
+  def update
+    @yacht = Yacht.find(params[:id])
+    @yacht.update(yacht_params)
+    redirect_to yachts_path
   end
 
   private

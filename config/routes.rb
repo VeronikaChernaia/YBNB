@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :views
   devise_for :users
   root to: "pages#home"
-
+  resource :user, only: [:show, :edit, :update]
   resources :yachts do
     resources :bookings, only: [:new, :create, :show, :update]
   end

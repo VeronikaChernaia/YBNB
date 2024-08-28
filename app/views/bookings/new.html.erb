@@ -1,9 +1,14 @@
-<h1><b><%= @yacht.title %> </b>Booking </h1>
-<%= simple_form_for [@yacht, @booking] do |f| %>
-  <%= f.input :check_in_date %>
-  <%= f.input :check_out_date %>
+
+<div class="container-middle">
+  <div class="container-content">
+      <h1><b><%= @yacht.title %> </b>Booking </h1>
+      <%= simple_form_for [@yacht, @booking] do |f| %>
+        <%= f.input :check_in_date %>
+        <%= f.input :check_out_date %>
 
 
-  <h2> Your price : 1,000$ </h2>
-  <%= f.submit "Submit Booking", class: "btn btn-flat" %>
-<% end %>
+        <h2> Your price : 1,000$ </h2>
+        <%= f.submit "Submit Booking", class: "btn btn-flat" %>
+      <% end %>
+  </div>
+</div>

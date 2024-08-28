@@ -73,6 +73,15 @@ yacht_descriptions = [
   "An elegant and well-equipped yacht, perfect for both relaxation and adventure."
 ]
 
+yacht_pictures = [
+  "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fmb.cision.com%2FPublic%2F4617%2F9528502%2F9a95ae41eb2b5835_org.jpg&f=1&nofb=1&ipt=8a5eb277a206656aa087824818c324a977fa1557717d13d8cde21d41a226acea&ipo=images",
+  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.yachtworld.com%2Fresize%2F1%2F60%2F37%2F7716037_20210115071455868_1_XLARGE.jpg%3Ff%3D%2F1%2F60%2F37%2F7716037_20210115071455868_1_XLARGE.jpg%26w%3D5906%26h%3D2953%26t%3D1610723698000&f=1&nofb=1&ipt=d3a509d41b19401ca5941d0da18ad8164f294a20660a025b2c1e9f4f4bfad0f9&ipo=images",
+  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.superyachtfan.com%2Fwp-content%2Fuploads%2F2020%2F08%2FDilbar-156m-Lurssen-33862064078.jpg&f=1&nofb=1&ipt=e036ee3e609eb21b1d48cd51246676f04b7fe8959c7337f83638ba0c30c19e6f&ipo=images",
+  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.fraseryachts.com%2Fuploads%2Fimage%2Fyachts%2Fproject-atalay%2Fthumb_14.-21_project-atalay_15th_1300x878px.jpg&f=1&nofb=1&ipt=216a2fe8326c59a48f8690b9586563d829f0d5dea60ec6df231b5a75d4da78df&ipo=images",
+  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyachtharbour.com%2Fstatic%2Fuploads%2F3111_b2114.jpg&f=1&nofb=1&ipt=a5b6fc7064e1d15d1fba062f276af969628795f37827f15cc0c1b328cf28a85d&ipo=images",
+  "https://aquaparkaquaglide.com/wp-content/uploads/2022/03/katina_joe-2.jpg"
+]
+
 
 
 owner = User.create!(
@@ -104,6 +113,11 @@ puts "2 users created"
     port: port_names.sample,
     owner: owner
   )
+  ## attach the images to the yachts
+  image_url = yacht_pictures.sample
+  downloaded_image = URI.open(image_url)
+  yacht.photos.attach(io: downloaded_image, filename: "yacht_#{i}.jpg", content_type: 'image/jpeg')
+
   puts "yacht #{i} created"
 
 

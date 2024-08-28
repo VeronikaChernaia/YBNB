@@ -7,7 +7,7 @@
   <%= f.input :description %>
   <%= f.input :port %>
   <%= f.input :price_per_hour %>
-  <%= f.input :photo, as: :file %>
+<%= f.input :photos, as: :file, input_html: { multiple: true } %>
   <%= f.submit "Add a new yacht listing", class: "btn btn-primary" %>
 <% end %>
 </div>

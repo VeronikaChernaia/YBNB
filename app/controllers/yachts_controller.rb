@@ -13,7 +13,6 @@ class YachtsController < ApplicationController
   end
 
   def create
-
     @yacht = Yacht.new(yacht_params)
     @yacht.user = current_user
     if @yacht.save
@@ -23,9 +22,19 @@ class YachtsController < ApplicationController
     end
   end
 
+  def edit
+    @yacht = Yacht.find(params[:id])
+  end
+
+  def update
+    @yacht = Yacht.find(params[:id])
+    @yacht.update(yacht_params)
+    redirect_to yachts_path
+  end
+
   private
 
   def yacht_params
-    params.require(:yacht).permit(:title, :brand, :description, :port, :price_per_hour, :photo)
+    params.require(:yacht).permit(:title, :brand, :description, :port, :price_per_hour, photos: [])
   end
 end

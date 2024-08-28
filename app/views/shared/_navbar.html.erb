@@ -11,10 +11,9 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
-          <li class="nav-item"><u>
-            <%= link_to 'Create a new Yacht', new_yacht_path, class: "nav-link" %>
-            </u>
-          </li>
+
+          <li class="nav-item active">
+            <%= link_to 'Create a new Yacht', new_yacht_path, class: "nav-link" %>          </li>
           <li class="nav-item active">
             <%= link_to 'Dashboard', dashboard_path, class: "nav-link" %>
           </li>
@@ -23,10 +22,14 @@
           </li>
           <li class="nav-item dropdown">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjkzNy1hZXctMTY1LWtsaGN3ZWNtLmpwZw.jpg", class: "avatar", alt: "dropdown menu" %>
-          </a>
+              <% if current_user.profile_picture.attached? %>
+                  <%= image_tag current_user.profile_picture, class: "avatar" %>
+              <% else %>
+                  <%= image_tag "https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjkzNy1hZXctMTY1LWtsaGN3ZWNtLmpwZw.jpg", class: "avatar" %>
+              <% end %>
+           </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Account", "#", class: "dropdown-item" %>
+              <%= link_to "Account", user_path(@user), class: "dropdown-item" %>
               <%= link_to "Booking requests", "#", class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>

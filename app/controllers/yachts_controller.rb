@@ -22,6 +22,16 @@ class YachtsController < ApplicationController
     end
   end
 
+  def edit
+    @yacht = Yacht.find(params[:id])
+  end
+
+  def update
+    @yacht = Yacht.find(params[:id])
+    @yacht.update(yacht_params)
+    redirect_to yachts_path
+  end
+
   private
 
   def yacht_params

@@ -1,6 +1,10 @@
 class BookingsController < ApplicationController
   before_action :set_yacht, only: [:new, :create]
   before_action :authenticate_user!
+
+
+
+
   def new
     @yacht = Yacht.find(params[:yacht_id])
     @booking = Booking.new
@@ -13,13 +17,24 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     @booking.save
     if @booking.save!
-    redirect_to yachts_path(@yacht)
+    redirect_to dashboard_path(@yacht), notice: 'Your booking request has been submitted.'
     else
       render :new, status: :unprocessable_entity
     end
   end
 
+
+  def update
+    if @booking.update(booking_params)
+      redirect_to dashboard_path, notice: 'Booking status updated successfully.'
+    else
+      render :show, status: :unprocessable_entity
+    end
+  end
+
   private
+
+
 
   def set_yacht
     @yacht = Yacht.find(params[:yacht_id])

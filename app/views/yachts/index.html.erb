@@ -1,7 +1,7 @@
 <div class="cover mb-4 d-flex align-items-center justify-content-center">
   <div class="text-center text-white">
       <% if current_user %>
-      <h2> Hi, <%= current_user.first_name %>! Welcome to YachtBNB! </h2>
+      <h2> Hi, <%= current_user.email %>! Welcome to YachtBNB! </h2>
       <% end %>
     <h1>Rent the yacht of your dreams!</h1>
     <h3 class="typed-js" data-controller="typed-js"></h3>
@@ -11,7 +11,6 @@
 <div class="container py-5">
   <div class="d-flex align-items-center justify-content-between mb-3">
     <h3 class="mb-0">Yachts</h3>
-    <%= link_to "Book", "#", class: "btn btn-flat" %>
   </div>
 
   <div class="row">
@@ -22,7 +21,14 @@
                        height: 200px; background-size: cover; background-position: center;">
             <%= link_to yacht.title, yacht_path(yacht), style: "color: white; text-decoration: none;" %>
           </div>
-          <h3> <%= yacht.brand %> </h3>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+            <h3> <%= yacht.brand %> </h3>
+            <%= link_to "Book", new_yacht_booking_path(yacht), class: "btn btn-flat" %>
+          </div>
+          <div style = "padding: 10px;">
+              <p>  <%= yacht.description %> </p>
+          </div>
+
       </div>
     <% end %>
   </div>

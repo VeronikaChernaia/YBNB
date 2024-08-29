@@ -1,0 +1,18 @@
+.container-middle {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Aligns items at the start of the flex container's cross axis */
+  height: 100vh; /* Full viewport height */
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}
+
+.container-content {
+  width: 100%;
+  max-width: 800px; /* Set your desired max-width */
+  padding: 20px;
+  background-color: #f8f9fa; /* Light background color */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional shadow for better visualization */
+  border-radius: 8px; /* Optional rounded corners */
+}

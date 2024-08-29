@@ -1,14 +1,14 @@
 
 <div class="container-middle">
   <div class="container-content">
-      <h1><b><%= @yacht.title %> </b>Booking </h1>
+      <h1>Edit your booking</h1>
       <%= simple_form_for [@yacht, @booking] do |f| %>
         <%= f.input :check_in_date  %>
         <%= f.input :check_out_date %>
 
 
         <h2> Your price : <%=f.object.check_in_date %></h2>
-        <%= f.submit "Submit Booking", class: "btn btn-flat" %>
+        <%= f.submit "Submit Changes", class: "btn btn-flat" %>
       <% end %>
   </div>
 </div>

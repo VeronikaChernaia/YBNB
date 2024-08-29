@@ -1,13 +1,15 @@
-<div class="container mt-5">
-<h1>Edit Yacht Listing</h1>
+<div class="container-middle">
+  <div class="container-content">
+      <h1>Edit Yacht Listing</h1>
 
-<%= simple_form_for [@yacht] do |f| %>
-  <%= f.input :title %>
-  <%= f.input :brand %>
-  <%= f.input :description %>
-  <%= f.input :port %>
-  <%= f.input :price_per_hour %>
-  <%= f.input :photo, as: :file %>
-  <%= f.submit "Submit changes", class: "btn btn-primary" %>
-<% end %>
+      <%= simple_form_for [@yacht] do |f| %>
+        <%= f.input :title %>
+        <%= f.input :brand %>
+        <%= f.input :description %>
+        <%= f.input :port %>
+        <%= f.input :price_per_hour %>
+        <%= f.input :photo, as: :file %>
+        <%= f.submit "Submit changes", class: "btn btn-primary" %>
+      <% end %>
+ </div>
 </div>

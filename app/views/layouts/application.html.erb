@@ -11,14 +11,16 @@
   </head>
 
   <body>
+    <div class="d-flex flex-column min-vh-100">
+      <%= render 'shared/navbar' %>
+      <%= render 'shared/flashes' %>
+            <article class="flex-grow-1 p-5">
 
-    <%= render 'shared/navbar' %>
-    <%= render 'shared/flashes' %>
-    <div class = "container">
-      <%= yield %>
+              <%= yield %>
 
+          </article>
+
+        <%= render 'shared/footer' %>
     </div>
-    <%= render 'shared/footer' %>
-
   </body>
 </html>

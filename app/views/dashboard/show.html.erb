@@ -16,6 +16,14 @@
 </ul>
 
 
+      <div class= 'grid'>
+        <% @yachts.each do |yacht| %>
+         <div>
+            <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= asset_path('ybnb-removebg-preview.png') %>); border-radius: 10px">
+                <h3><%= link_to yacht.title, yacht_path(yacht), style: "color: white; text-decoration: none;" %></h3>
+            </div>
+
+
 
 <div class="tab-content" id="myTabContent">
   <!-- My Yachts Tab Pane -->
@@ -33,6 +41,7 @@
 
               </div>
             <% end %>
+
           </div>
         <% else %>
           <p>You have no yachts.</p>
@@ -101,4 +110,34 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="incoming-bookings-container">
+  <div class="text-center text-black">
+    <h2>Incoming Bookings for My Yachts</h2>
+  </div>
+  <% if @incoming_bookings.any? %>
+    <div class="grid">
+      <% @incoming_bookings.each do |booking| %>
+        <div class="card">
+          <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= asset_path('ybnb-removebg-preview.png') %>); border-radius: 10px">
+            <h3 style="margin-bottom: 10px"><%= booking.yacht.title %></h3>
+
+          </div>
+          <p style="margin-bottom: 10px; margin-top: 10px;">Date: <%= booking.check_in_date %></p>
+          <h3 style="margin-bottom: 10px"> <%= booking.booking_status? ? booking.booking_status : "Pending" %></h3>
+          <%= form_with(model: booking, url: yacht_booking_path(booking.yacht, booking), local: true, method: :patch) do |f| %>
+          <div class="form-group d-flex align-items-center justify-content-between mb-3" >
+            <%= f.select :booking_status, ['Pending', 'Confirmed', 'Canceled'], { selected: booking.booking_status }, class: "form-control" %>
+            <%= f.submit "Update", class: "btn btn-flat", style: "margin-left: 5px;" %>
+          </div>
+        <% end %>
+
+          <%= link_to "Review", "#", class: "btn btn-update" %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>You have no incoming bookings.</p>
+  <% end %>
 </div>

@@ -1,84 +1,104 @@
-<div class="text-center text-black">
-<h1>My Dashboard</h1>
-</div>
 
-<div class="dashboard-container">
+<div class="text-center text-black m-20px" >
+      <h1>My Dashboard</h1>
+  </div>
 
-  <div class="yachts-container">
-    <div class="text-center text-black">
-       <h2>My Yachts</h2>
-    </div>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a class="nav-link active" id="yachts-tab" data-bs-toggle="tab" href="#yachts" role="tab" aria-controls="yachts" aria-selected="true">My Yachts</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="bookings-tab" data-bs-toggle="tab" href="#bookings" role="tab" aria-controls="bookings" aria-selected="false">My Bookings</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="incoming-bookings-tab" data-bs-toggle="tab" href="#incoming-bookings" role="tab" aria-controls="incoming-bookings" aria-selected="false">Incoming Bookings</a>
+  </li>
+</ul>
 
-    <% if @yachts.any? %>
 
-      <div class= 'grid'>
-        <% @yachts.each do |yacht| %>
-         <div>
-            <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= asset_path('ybnb-removebg-preview.png') %>); border-radius: 10px">
-                <h3><%= link_to yacht.title, yacht_path(yacht), style: "color: white; text-decoration: none;" %></h3>
-            </div>
-           
+
+<div class="tab-content" id="myTabContent">
+  <!-- My Yachts Tab Pane -->
+  <div class="tab-pane fade show active" id="yachts" role="tabpanel" aria-labelledby="yachts-tab">
+
+<%= link_to "Add a yacht", new_yacht_path, class: "btn btn-flat" %>
+
+        <% if @yachts.any? %>
+          <div class="grid">
+            <% @yachts.each do |yacht| %>
+              <div class = "card">
+               <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= yacht.photos.attached? ? cl_image_path(yacht.photos.first.key, width: 400, height: 300, crop: :fill) : asset_path('ybnb-removebg-preview.png') %>); border-radius: 5px">
+               <h3><%= link_to yacht.title, yacht_path(yacht), style: "color: white; text-decoration: none;" %></h3>
+              </div>
+
+              </div>
+            <% end %>
           </div>
+        <% else %>
+          <p>You have no yachts.</p>
         <% end %>
 
       </div>
-
-    <% else %>
-      <p>You have no yachts.</p>
-    <% end %>
-    <%= link_to "Add a yacht", new_yacht_path, class: "btn btn-flat" %>
-  </div>
-
-  <div class="bookings-container">
-    <div class="text-center text-black">
-      <h2>My Bookings</h2>
     </div>
-    <% if @bookings.any? %>
-     <div class="grid">
 
-        <% @bookings.each do |booking| %>
-          <div style = "card">
-            <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),  url(<%= asset_path('ybnb-removebg-preview.png') %>); border-radius: 10px">
-              <h3 style="margin-bottom: 10px"> <%= booking.yacht.title %></h3>
-
-           </div>
-            <p style="margin-bottom: 10px">Date: <%= booking.check_in_date %></p>
-            <p style="margin-bottom: 10px">Status: <%= booking.booking_status %></p>
-            <%= link_to "See Details", "#", class: "btn btn-flat" %>
-          </div>
-        <% end %>
-    </div>
-    <% else %>
-      <p>You have no bookings.</p>
-    <% end %>
-  </div>
-</div>
-<div class="incoming-bookings-container">
-  <div class="text-center text-black">
-    <h2>Incoming Bookings for My Yachts</h2>
-  </div>
-  <% if @incoming_bookings.any? %>
-    <div class="grid">
-      <% @incoming_bookings.each do |booking| %>
-        <div class="card">
-          <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= asset_path('ybnb-removebg-preview.png') %>); border-radius: 10px">
-            <h3 style="margin-bottom: 10px"><%= booking.yacht.title %></h3>
-
-          </div>
-          <p style="margin-bottom: 10px; margin-top: 10px;">Date: <%= booking.check_in_date %></p>
-          <h3 style="margin-bottom: 10px"> <%= booking.booking_status %></h3>
-          <%= form_with(model: booking, url: yacht_booking_path(booking.yacht, booking), local: true, method: :patch) do |f| %>
-          <div class="form-group d-flex align-items-center justify-content-between mb-3" >
-            <%= f.select :booking_status, ['Pending', 'Confirmed', 'Canceled'], { selected: booking.booking_status }, class: "form-control" %>
-            <%= f.submit "Update", class: "btn btn-flat", style: "margin-left: 5px;" %>
-          </div>
-        <% end %>
-
-          <%= link_to "Review", "#", class: "btn btn-update" %>
+  <!-- My Bookings Tab Pane -->
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade" id="bookings" role="tabpanel" aria-labelledby="bookings-tab">
+    <div class="container">
+        <div class="grid">
+      <% if @bookings.any? %>
+          <% @bookings.each do |booking| %>
+          <div class="card">
+            <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= booking.yacht.photos.attached? ? cl_image_path(booking.yacht.photos.first.key, width: 400, height: 300, crop: :fill) : asset_path('ybnb-removebg-preview.png') %>); border-radius: 5px">
+              <h3 style="margin-bottom: 10px"><%= booking.yacht.title %></h3>
+            </div>
+              <p style="margin-bottom: 10px">Date: <%= booking.check_in_date %></p>
+              <p style="margin-bottom: 10px">Status: <%= booking.booking_status %></p>
+              <%= form_with(model: booking, url: yacht_booking_path(booking.yacht, booking), local: true, method: :patch) do |f| %>
+                <div class="form-group d-flex align-items-center justify-content-between mb-3">
+                  <%= f.select :booking_status, ['Pending', 'Canceled'], { selected: booking.booking_status }, class: "form-control" %>
+                  <%= f.submit "Update", class: "btn btn-flat", style: "margin-left: 5px;" %>
+                </div>
+              <% end %>
+              <%= link_to "See Details", "yacht_booking_path(booking.yacht, booking", class: "btn btn-flat" %>
+            </div>
+          <% end %>
         </div>
+      <% else %>
+        <p>You have no bookings.</p>
       <% end %>
+      </div>
+    </div >
+  </div>
+
+  <!-- Incoming Bookings Tab Pane -->
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade" id="incoming-bookings" role="tabpanel" aria-labelledby="incoming-bookings-tab">
+      <div class = container>
+          <div class="grid">
+
+        <% if @incoming_bookings.any? %>
+            <% @incoming_bookings.each do |booking| %>
+              <div class="card">
+              <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= booking.yacht.photos.attached? ? cl_image_path(booking.yacht.photos.first.key, width: 400, height: 300, crop: :fill) : asset_path('ybnb-removebg-preview.png') %>); border-radius: 5px">
+                        <h3 style="margin-bottom: 10px"><%= booking.yacht.title %></h3>
+                </div>
+                <p style="margin-bottom: 10px; margin-top: 10px;">Date: <%= booking.check_in_date %></p>
+                <h3 style="margin-bottom: 10px"><%= booking.booking_status %></h3>
+                <%= form_with(model: booking, url: yacht_booking_path(booking.yacht, booking), local: true, method: :patch) do |f| %>
+                  <div class="form-group d-flex align-items-center justify-content-between mb-3">
+                    <%= f.select :booking_status, ['Pending', 'Confirmed', 'Canceled'], { selected: booking.booking_status }, class: "form-control" %>
+                    <%= f.submit "Update", class: "btn btn-flat", style: "margin-left: 5px;" %>
+                  </div>
+                <% end %>
+                <%= link_to "See Details",  yacht_booking_path(booking.yacht, booking), class: "btn btn-update" %>
+              </div>
+            <% end %>
+
+        <% else %>
+          <p>You have no incoming bookings.</p>
+        <% end %>
+      </div>
     </div>
-  <% else %>
-    <p>You have no incoming bookings.</p>
-  <% end %>
+  </div>
 </div>

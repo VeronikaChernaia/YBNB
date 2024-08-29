@@ -2,6 +2,12 @@ class YachtsController < ApplicationController
   before_action :authenticate_user!
   def index
     @yachts = Yacht.all
+    @markers = @yachts.geocoded.map do |yacht|
+      {
+        lat: yacht.latitude,
+        lng: yacht.longitude
+      }
+    end
   end
 
   def show

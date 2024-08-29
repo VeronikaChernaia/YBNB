@@ -7,7 +7,7 @@
     <!-- Profile Picture Section -->
     <div class="col-md-3 text-center">
       <% if @user.profile_picture.attached? %>
-        <%= image_tag @user.profile_picture, size: "200x200", class: "img-thumbnail" %>
+       <%= cl_image_tag @current_user.profile_picture.key, height: 200, width: 200, crop: :fill %>
       <% else %>
         <%= image_tag "ybnb-removebg-preview.png", size: "200x200", class: "img-thumbnail rounded-circle" %>
       <% end %>
@@ -28,13 +28,12 @@
 
   <!-- Form for updating the profile picture -->
   <div class="mt-4">
-    <%= form_with(model: @user, local: true, class: "d-flex flex-column align-items-start") do |form| %>
+    <%= simple_form_for(@user) do |f| %>
+
       <div class="mb-3">
-        <%= form.label :profile_picture, "Update Profile Picture" %>
-        <%= form.file_field :profile_picture, class: "form-control" %>
-      </div>
-      <div>
-        <%= form.submit "Update Profile", class: "btn btn-update" %>
+       <%= f.input :profile_picture, as: :file %>
+      <%= f.submit "Update Picture", class: "btn btn-update" %>
+
       </div>
     <% end %>
   </div>

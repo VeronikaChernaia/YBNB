@@ -10,6 +10,7 @@
   font-weight: bold;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  margin-bottom: 10px;
 }
 
 .card-large {
@@ -20,15 +21,15 @@
 .card {
   align-items: right;
   color: rgb(13, 1, 1);
-  font-weight: bold;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  margin: 15px;
+  margin: 0px;
   padding: 20px;
-  border-radius: 8px;
-  background-color: white;
+  border-radius: 5px;
+  background-color: transparent;
 }
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 15px;
+  margin-top: 20px;
 }

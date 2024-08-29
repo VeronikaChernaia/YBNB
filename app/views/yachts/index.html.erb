@@ -8,7 +8,6 @@
   </div>
 </div>
 
-<div class="container py-5">
   <div class="d-flex align-items-center justify-content-between mb-3">
     <h3 class="mb-0">Yachts</h3>
   </div>
@@ -21,15 +20,14 @@
           </div>
           <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
             <h3> <%= yacht.brand %> </h3>
-            <%# test comment %>
             <%= link_to "Book", new_yacht_booking_path(yacht), class: "btn btn-flat" %>
           </div>
           <div style = "padding: 10px;">
               <p>  <%= yacht.description %> </p>
           </div>
 
-          <h3> <%= yacht.brand %> </h3>
+
       </div>
     <% end %>
   </div>
-</div>
+

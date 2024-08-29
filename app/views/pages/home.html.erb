@@ -9,20 +9,15 @@
   <h3><%= link_to 'Log In', new_user_session_path %>  or  <%= link_to 'Sign Up', new_user_registration_path %> to discover all the yachts! </h3>
 </div>
 
-<div class="container py-5">
   <div class="d-flex align-items-center justify-content-between mb-3">
     <h2 class="mb-0">Yachts</h2>
   </div>
   <div class="row">
     <% @yachts.each do |yacht| %>
       <div class="co-12 col-sm-6 col-md-4 mb-3">
-          <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= asset_path('ybnb-removebg-preview.png') %>)">
+          <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= yacht.photos.attached? ? cl_image_path(yacht.photos.first.key, width: 400, height: 300, crop: :fill): asset_path('ybnb-removebg-preview.png')%>)">
             <%= yacht.title %>
           </div>
         <h3> <%= yacht.brand %> </h3>
       </div>
     <% end %>
-    <div class = "py-5">
-
-  </div>
-</div>

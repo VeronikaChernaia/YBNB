@@ -1,11 +1,16 @@
 class BookingsController < ApplicationController
-  before_action :set_yacht, only: [:new, :create]
+  before_action :set_yacht, only: [:new, :create, :show]
   before_action :authenticate_user!
+  before_action :set_booking, only: [:show, :update]
+
   def new
     @yacht = Yacht.find(params[:yacht_id])
     @booking = Booking.new
   end
 
+  def show
+    # @booking is already set by the before_action
+  end
 
   def create
     @booking = Booking.new(booking_params)
@@ -30,6 +35,10 @@ class BookingsController < ApplicationController
   end
 
   private
+
+  def set_booking
+    @booking = Booking.find(params[:id])
+  end
   def set_yacht
     @yacht = Yacht.find(params[:yacht_id])
   end

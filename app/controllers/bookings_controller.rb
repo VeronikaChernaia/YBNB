@@ -20,7 +20,8 @@ class BookingsController < ApplicationController
   end
 
   def update
-    @booking2 = Booking.find(params[:booking_id])
+    @booking2 = Booking.find(params[:id])
+    @booking = Booking.find(params[:id])
     if @booking.update(booking_params)
       redirect_to dashboard_path, notice: 'Booking status updated successfully.'
     else

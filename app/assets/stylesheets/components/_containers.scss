@@ -16,3 +16,13 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional shadow for better visualization */
   border-radius: 8px; /* Optional rounded corners */
 }
+
+.container-content-large {
+  width: 100%;
+  max-width: 1200px;
+  height : 100%; /* Set your desired max-width */
+  padding: 20px;
+  background-color: #f8f9fa; /* Light background color */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional shadow for better visualization */
+  border-radius: 8px; /* Optional rounded corners */
+}

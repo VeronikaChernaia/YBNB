@@ -1,4 +1,6 @@
-<div class="container mt-5">
+<div class="container-middle">
+  <div class="container-content">
+
 
   <h1 class="mb-4">My Profile</h1>
 
@@ -12,21 +14,6 @@
         <%= image_tag "ybnb-removebg-preview.png", size: "200x200", class: "img-thumbnail rounded-circle" %>
       <% end %>
     </div>
-
-    <!-- Profile Information Section -->
-    <div class="col-md-9">
-      <p><strong>Email:</strong> <%= @user.email %></p>
-      <p><strong>First Name:</strong> <%= @user.first_name %></p>
-      <p><strong>Last Name:</strong> <%= @user.last_name %></p>
-      <p><strong>Account Created At:</strong> <%= @user.created_at.strftime("%B %d, %Y") %></p>
-    </div>
-    <div class="mt-4">
-      <%= link_to "Edit", edit_user_path(@user), class: "btn btn-flat me-2" %>
-    </div>
-
-  </div>
-
-  <!-- Form for updating the profile picture -->
   <div class="mt-4">
     <%= simple_form_for(@user) do |f| %>
 
@@ -37,7 +24,22 @@
       </div>
     <% end %>
   </div>
+    <!-- Profile Information Section -->
+
+      <p><strong>Email:</strong> <%= @user.email %></p>
+      <p><strong>First Name:</strong> <%= @user.first_name %></p>
+      <p><strong>Last Name:</strong> <%= @user.last_name %></p>
+      <p><strong>Account Created At:</strong> <%= @user.created_at.strftime("%B %d, %Y") %></p>
+
+      <%= link_to "Edit", edit_user_path(@user), class: "btn btn-flat me-2" %>
+
+
+  </div>
+
+  <!-- Form for updating the profile picture -->
+
   <div class="mt-4">
     <%= link_to "Reset your password", edit_user_registration_path, class: "btn btn-flat me-2" %>
   </div>
+ </div>
 </div>

@@ -7,4 +7,7 @@ class Yacht < ApplicationRecord
 
   has_many :reviews, dependent: :destroy
   has_many :bookings, dependent: :destroy
+
+  geocoded_by :port
+  after_validation :geocode, if: :will_save_change_to_port?
 end

@@ -1,0 +1,73 @@
+<div class="container-middle">
+  <div class="container-content">
+
+                <h1><%= @yacht.title %> Booking Details</h1>
+          <% if @yacht.photos.attached? %>
+            <div id="carouselExampleControls" class="carousel slide carousel-fade" data-bs-ride="carousel" >
+              <div class="carousel-indicators">
+                <% @yacht.photos.each_with_index do |photo, index| %>
+                  <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="<%= index %>" class="<%= 'active' if index.zero? %>" aria-current="<%= 'true' if index.zero? %>" aria-label="Slide <%= index + 1 %>"></button>
+                <% end %>
+              </div>
+              <div class="carousel-inner">
+                <% @yacht.photos.each_with_index do |photo, index| %>
+                  <div class="carousel-item <%= 'active' if index.zero? %>">
+                    <%= cl_image_tag(photo.key,height:400, class: 'd-block w-100 ') %>
+                  </div>
+                <% end %>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+            <% else %>
+            <p>No picture available</p>
+            <% end %>
+
+                <p>Brand: <%= @yacht.brand %></p>
+                <p>Description: <%= @yacht.description %></p>
+                <p>€<%= @yacht.price_per_hour %> per hour</p>
+                <p>Port: <%= @yacht.port %></p>
+
+      <p>
+        <strong>User:</strong>
+        <%= @booking.user.email %>
+        <%= @booking.user.first_name %>
+        <%= @booking.user.last_name %>
+
+
+      </p>
+
+      <p>
+        <strong>Check-in Date:</strong>
+        <%= @booking.check_in_date %>
+      </p>
+
+      <p>
+        <strong>Check-out Date:</strong>
+        <%= @booking.check_out_date %>
+      </p>
+
+      <p>
+        <strong>Status:</strong>
+        <%= @booking.booking_status %>
+      </p>
+<%= link_to "Edit booking", edit_yacht_booking_path, class: "btn btn-flat" %>
+
+      <%= form_with(model: @booking, url: yacht_booking_path(@booking.yacht, @booking), local: true, method: :patch) do |f| %>
+                    <div class="form-group d-flex align-items-center justify-content-between mb-3">
+                      <%= f.select :booking_status, options_for_select([['Select', nil], 'Pending', 'Canceled'], selected: @booking.booking_status), { include_blank: false, prompt: 'Select', disabled: '' }, class: "form-control" %>
+                      <%= f.submit "Update", class: "btn btn-flat", style: "margin-left: 5px;" %>
+                    </div>
+                  <% end %>
+
+      <%= link_to 'Back', dashboard_path(active: 'incoming-bookings') , class: "btn btn-update " %>
+
+
+  </div>
+ </div>

@@ -3,6 +3,7 @@ class YachtsController < ApplicationController
   def index
     @yachts = Yacht.all
 
+
      # Conditions dynamiques pour les filtres avec OR logique
      or_conditions = []
      or_values = []
@@ -29,6 +30,14 @@ class YachtsController < ApplicationController
        @yachts = @yachts.joins(:bookings)
                         .where.not('bookings.check_in_date <= ? AND bookings.check_out_date >= ?', check_out_date, check_in_date)
      end
+
+    @markers = @yachts.geocoded.map do |yacht|
+      {
+        lat: yacht.latitude,
+        lng: yacht.longitude
+      }
+    end
+
   end
 
   def show

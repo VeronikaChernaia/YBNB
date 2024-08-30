@@ -1,37 +1,10 @@
 <div class="container-content">
   <h1><%= @yacht.title %></h1>
-  <% if @yacht.photos.attached? %>
-    <div id="carouselExampleControls" class="carousel slide carousel-fade" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <% @yacht.photos.each_with_index do |photo, index| %>
-          <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="<%= index %>" class="<%= 'active' if index.zero? %>" aria-current="<%= 'true' if index.zero? %>" aria-label="Slide <%= index + 1 %>"></button>
-        <% end %>
-      </div>
-      <div class="carousel-inner">
-        <% @yacht.photos.each_with_index do |photo, index| %>
-          <div class="carousel-item <%= 'active' if index.zero? %>">
-            <%= cl_image_tag(photo.key, height: 400, class: 'd-block w-100') %>
-          </div>
-        <% end %>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-  <% else %>
-    <p>No picture available</p>
-  <% end %>
+
 
   <p>Brand: <%= @yacht.brand %></p>
   <p>Description: <%= @yacht.description %></p>
-  <p>€<%= @yacht.price_per_hour %> per hour</p>
+  <p>€ <%= @yacht.price_per_hour %> per hour</p>
   <p>Port: <%= @yacht.port %></p>
-  <%= link_to "Back to all yachts", yachts_path, class: "btn btn-flat" %>
-  <%= link_to "Edit listing", edit_yacht_path, class: "btn btn-flat" %>
-  <%= link_to "Book", new_yacht_booking_path(@yacht), class: "btn btn-flat" %>
+  <%= link_to "Back", yachts_path, class: "btn btn-flat" %>
 </div>

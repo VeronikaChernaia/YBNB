@@ -67,23 +67,19 @@
     <% @yachts.each do |yacht| %>
       <div class="card">
           <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= yacht.photos.attached? ? cl_image_path(yacht.photos.first.key, width: 400, height: 300, crop: :fill): asset_path('ybnb-removebg-preview.png')  %>);">
-            <%= link_to yacht.title, yacht_path(yacht), style: "color: white; text-decoration: none;" %>
+            <%= link_to yacht.title, show_with_booking_yacht_path(yacht), style: "color: white; text-decoration: none;" %>
           </div>
+
           <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h3 style="margin: 0;"> <%= yacht.brand %> </h3>
-            <%= link_to "Book", new_yacht_booking_path(yacht), class: "btn btn-flat" %>
+            <h3 style="margin: 0;"> <%= yacht.port %> </h3>
           </div>
-          <div >
-              <p>  <%= yacht.port %> </p>
-          </div>
-          <div >
-              <p>  <%= yacht.description %> </p>
-          </div>
+
+
 
       </div>
     <% end %>
    </div>
-  <div id="map" style="width: 100%; "
+  <div id="map" style="width: 40%; "
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>

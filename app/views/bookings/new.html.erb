@@ -9,9 +9,11 @@
       <%= f.input :check_out_date, as: :date, html5: true,  input_html: { data: { booking_target: "checkOut",
         action: "change->booking#updateDates" } } %>
 
-      <h3 id="price" data-booking-target="price" style="color:#c0392b" > Select your dates to calcul the price..</h3>
+      <h3 id="price" data-booking-target="price"> Select your dates to calcul the price..</h3>
       <p>Price per day : <span id="pricePerDay" data-booking-target="pricePerDay"><%= @yacht.price_per_hour %></span>$</p>
-      <%= f.submit "Submit Booking", class: "btn btn-flat" %>
+
+      <%= f.submit "Submit Booking", class: "btn btn-flat", data: { booking_target: "btn" },  disabled: true %>
+
     <% end %>
   </div>
 </div>

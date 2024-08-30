@@ -18,6 +18,11 @@ class YachtsController < ApplicationController
     @yacht = Yacht.new
   end
 
+  def show_with_booking
+    @yacht = Yacht.find(params[:id])
+    @booking = Booking.new
+  end
+  
   def create
     @yacht = Yacht.new(yacht_params)
     @yacht.user = current_user

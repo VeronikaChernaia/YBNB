@@ -1,14 +1,18 @@
-
 <div class="container-middle">
-  <div class="container-content">
-      <h1>Edit your booking</h1>
-      <%= simple_form_for [@yacht, @booking] do |f| %>
-        <%= f.input :check_in_date  %>
-        <%= f.input :check_out_date %>
+  <div class="container-content" data-controller="booking">
+     <h1>Edit Booking </h1>
+    <%= simple_form_for [@yacht, @booking] do |f| %>
+      <%= f.input :check_in_date, as: :date, html5: true, input_html: { data: { booking_target: "checkIn",
+        action: "change->booking#updateDates" } } %>
 
+      <%= f.input :check_out_date, as: :date, html5: true,  input_html: { data: { booking_target: "checkOut",
+        action: "change->booking#updateDates" } } %>
 
-        <h2> Your price : <%=f.object.check_in_date %></h2>
-        <%= f.submit "Submit Changes", class: "btn btn-flat" %>
-      <% end %>
+      <h3 id="price" data-booking-target="price"> Select your dates to calcul the price..</h3>
+      <p>Price per day : <span id="pricePerDay" data-booking-target="pricePerDay"><%= @yacht.price_per_hour %></span>$</p>
+
+      <%= f.submit "Submit Changes", class: "btn btn-flat", data: { booking_target: "btn" },  disabled: true %>
+
+    <% end %>
   </div>
 </div>

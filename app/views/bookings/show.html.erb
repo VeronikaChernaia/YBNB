@@ -39,7 +39,6 @@
         <%= @booking.user.email %>
         <%= @booking.user.first_name %>
         <%= @booking.user.last_name %>
-        <%= @booking.user.profile_picture %>
 
 
       </p>
@@ -59,8 +58,14 @@
         <%= @booking.booking_status %>
       </p>
 
-      <%= link_to 'Edit', "#", class: "btn btn-primary" %>
-      <%= link_to 'Back', dashboard_path, class: "btn btn-secondary" %>
+      <%= form_with(model: @booking, url: yacht_booking_path(@booking.yacht, @booking), local: true, method: :patch) do |f| %>
+                    <div class="form-group d-flex align-items-center justify-content-between mb-3">
+                      <%= f.select :booking_status, options_for_select([['Select', nil], 'Pending', 'Canceled'], selected: @booking.booking_status), { include_blank: false, prompt: 'Select', disabled: '' }, class: "form-control" %>
+                      <%= f.submit "Update", class: "btn btn-flat", style: "margin-left: 5px;" %>
+                    </div>
+                  <% end %>
+
+      <%= link_to 'Back', dashboard_path(active: 'incoming-bookings') , class: "btn btn-update" %>
 
 
   </div>

@@ -8,33 +8,34 @@
   </div>
 </div>
 
-  <div class="d-flex align-items-center justify-content-between mb-3">
-    <h3 class="mb-0">Yachts</h3>
-  </div>
+  <div class="d-flex justify-content-center align-items-center mb-3">
+  <h3 class="mb-0">INSPIRATIONS</h3>
+</div>
 
-  <div class="row">
+  <div class="content">
+    <div class="cards">
     <% @yachts.each do |yacht| %>
-      <div class="col-12 col-sm-6 col-md-4 mb-3">
+      <div class="card">
           <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= yacht.photos.attached? ? cl_image_path(yacht.photos.first.key, width: 400, height: 300, crop: :fill): asset_path('ybnb-removebg-preview.png')  %>);">
             <%= link_to yacht.title, yacht_path(yacht), style: "color: white; text-decoration: none;" %>
           </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
-            <h3> <%= yacht.brand %> </h3>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin: 0;"> <%= yacht.brand %> </h3>
             <%= link_to "Book", new_yacht_booking_path(yacht), class: "btn btn-flat" %>
           </div>
-          <div style = "padding: 10px;">
+          <div >
+              <p>  <%= yacht.port %> </p>
+          </div>
+          <div >
               <p>  <%= yacht.description %> </p>
           </div>
 
 
       </div>
     <% end %>
-  </div>
-
-</div>
-
-<div style="width: 100%; height: 600px;"
+   </div>
+  <div id="map" style="width: 100%; "
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-
+</div>

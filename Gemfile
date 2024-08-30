@@ -80,3 +80,5 @@ gem "devise"
 gem "cloudinary"
 gem "geocoder"
 gem 'active_storage_validations'
+gem "algoliasearch-rails"
+

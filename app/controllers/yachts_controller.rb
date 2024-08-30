@@ -2,12 +2,42 @@ class YachtsController < ApplicationController
   before_action :authenticate_user!
   def index
     @yachts = Yacht.all
+
+
+     # Conditions dynamiques pour les filtres avec OR logique
+     or_conditions = []
+     or_values = []
+
+     if params[:brand].present?
+       or_conditions << "brand = ?"
+       or_values << params[:brand]
+     end
+
+     if params[:port].present?
+       or_conditions << "port = ?"
+       or_values << params[:port]
+     end
+
+     if or_conditions.any?
+       @yachts = @yachts.where(or_conditions.join(' OR '), *or_values)
+     end
+
+     # Filtrer par date de check-in et check-out si elles sont présentes (AND logique)
+     if params[:check_in_date].present? && params[:check_out_date].present?
+       check_in_date = Date.parse(params[:check_in_date])
+       check_out_date = Date.parse(params[:check_out_date])
+
+       @yachts = @yachts.joins(:bookings)
+                        .where.not('bookings.check_in_date <= ? AND bookings.check_out_date >= ?', check_out_date, check_in_date)
+     end
+
     @markers = @yachts.geocoded.map do |yacht|
       {
         lat: yacht.latitude,
         lng: yacht.longitude
       }
     end
+
   end
 
   def show

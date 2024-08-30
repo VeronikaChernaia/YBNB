@@ -67,7 +67,19 @@
                   <h3 style="margin-bottom: 10px"><%= booking.yacht.title %></h3>
                 </div>
                   <p style="margin-bottom: 10px">Date: <%= booking.check_in_date %></p>
-                  <p style="margin-bottom: 10px">Status: <%= booking.booking_status %></p>
+                   Status:
+  <% case booking.booking_status %>
+  <% when nil %>
+    <span class="">Pending</span>
+  <% when "pending" %>
+    <span class="" >Pending</span>
+  <% when "confirmed" %>
+    <span class="">Confirmed</span>
+    <% when "confirmed" %>
+    <span class="">Confirmed</span>
+  <% else %>
+    <span class=""><%= booking.booking_status %></span>
+  <% end %>
                   <%= form_with(model: booking, url: yacht_booking_path(booking.yacht, booking), local: true, method: :patch) do |f| %>
                     <div class="form-group d-flex align-items-center justify-content-between mb-3">
                       <%= f.select :booking_status, options_for_select([['Select', nil], 'Pending', 'Canceled'], selected: booking.booking_status), { include_blank: false, prompt: 'Select', disabled: '' }, class: "form-control" %>

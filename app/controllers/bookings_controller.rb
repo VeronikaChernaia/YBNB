@@ -9,6 +9,7 @@ class BookingsController < ApplicationController
   end
 
   def show
+
     # @booking is already set by the before_action
   end
 
@@ -18,7 +19,7 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     @booking.save
     if @booking.save!
-    redirect_to dashboard_path(@yacht), notice: 'Your booking request has been submitted.'
+      redirect_to dashboard_path(active_tab: 'bookings'), notice: 'Your booking request has been submitted.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -42,6 +43,8 @@ class BookingsController < ApplicationController
   private
 
   def set_booking
+    @active_tab = params[:active_tab]
+
     @booking = Booking.find(params[:id])
   end
   def set_yacht

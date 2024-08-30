@@ -1,18 +1,3 @@
-.dashboard-container {
-  display: flex;
-  gap: 20px; /* Adds space between the two containers */
-  padding: 20px;
-}
-
-.yachts-container,
-.bookings-container {
-  background-color: #f8f9fa;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-
 .status-pill {
   display: inline-block;
   padding: 5px 10px;

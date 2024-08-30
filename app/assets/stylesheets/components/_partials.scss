@@ -1,0 +1,33 @@
+.container {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "header"
+    "content";
+  gap: 20px;
+  padding: 10px;
+}
+
+.header {
+  grid-area: header;
+}
+
+.content-grid {
+  grid-area: content;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.left-box, .right-box {
+
+  height: 100%;
+}
+
+.left-box {
+  grid-column: 1;
+}
+
+.right-box {
+  grid-column: 2;
+}

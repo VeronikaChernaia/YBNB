@@ -1,5 +1,5 @@
 <div class="container-content" data-controller="booking">
-  <h1><b><%= @yacht.title %></b> Booking</h1>
+  <h1></b> Booking</h1>
   <%= simple_form_for [@yacht, @booking] do |f| %>
     <%= f.input :check_in_date, as: :date, html5: true, input_html: { data: { booking_target: "checkIn",
       action: "change->booking#updateDates" } } %>

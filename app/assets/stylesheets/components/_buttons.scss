@@ -23,3 +23,24 @@
   background: #6a757e;
   transition: background 0.3s ease;
 }
+
+.reset-button {
+  background-color: #f1f1f1;
+  color: rgb(46, 43, 43);
+  padding: 10px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;; /* Aligns it to the far right */
+}
+
+.reset-button:hover {
+  background-color: #e0b6c1; /* Darker red on hover */
+  text-decoration: none;
+}
+
+.ml-2 {
+  margin-left: 10px; /* Adjust spacing between search and reset buttons */
+}

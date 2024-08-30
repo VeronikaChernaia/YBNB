@@ -14,16 +14,14 @@
   </head>
 
   <body>
-    <div class="d-flex flex-column min-vh-100">
-      <%= render 'shared/navbar' %>
-      <%= render 'shared/flashes' %>
-            <div  class="flex-grow-1 p-5">
-
-              <%= yield %>
-
-          </div>
-
-        <%= render 'shared/footer' %>
+      <div class="page-container">
+      <div class="navbar-container"><%= render "shared/navbar" %></div>
+      <div class="content-container">
+        <div class="home-margins">
+          <%= yield %>
+        </div>
+      </div>
+      <div class="footer-container"><%= render "shared/footer" %></div>
     </div>
   </body>
 </html>

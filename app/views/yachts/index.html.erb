@@ -1,3 +1,53 @@
+<!--Filter-->
+
+<%= form_with url: yachts_path, method: :get, local: true do %>
+  <div class="rounded-filter-bar">
+    <div class="filter-section">
+      <label for="brand">Yacht Brand</label>
+      <select id="brand" name="brand">
+        <option value="">Select Brand</option>
+        <option value="Azimut">Azimut</option>
+        <option value="Sunseeker">Sunseeker</option>
+        <option value="Ferretti">Ferretti</option>
+        <option value="Princess Yachts">Princess Yachts</option>
+        <option value="Benetti">Benetti</option>
+      </select>
+    </div>
+
+    <div class="filter-section">
+      <label for="port">Port</label>
+      <select id="port" name="port">
+        <option value="">Select Port</option>
+        <option value="Monaco">Monaco</option>
+        <option value="Nice">Nice</option>
+        <option value="Cannes">Cannes</option>
+        <option value="Dubai">Dubai</option>
+        <option value="Saint-Tropez">Saint-Tropez</option>
+      </select>
+    </div>
+
+    <div class="filter-section">
+      <label for="check_in_date" class="form-label">Check-In Date</label>
+      <input type="date" class="form-control" id="check_in_date" name="check_in_date" value="<%= params[:check_in_date] %>">
+    </div>
+
+    <div class="filter-section">
+      <label for="check_out_date" class="form-label">Check-Out Date</label>
+      <input type="date" class="form-control" id="check_out_date" name="check_out_date" value="<%= params[:check_out_date] %>">
+    </div>
+
+    <div class="filter-section-buttons d-flex align-items-center">
+      <button class="filter-button" type="submit">
+        <i class="fa fa-search"></i>
+      </button>
+      <%= link_to 'Reset Filters', yachts_path, class: 'reset-button ml-2' %>
+    </div>
+  </div>
+<% end %>
+
+
+<!-- Cover -->
+
 <div class="cover mb-4 d-flex align-items-center justify-content-center">
   <div class="text-center text-white">
       <% if current_user %>
@@ -17,24 +67,20 @@
     <% @yachts.each do |yacht| %>
       <div class="card">
           <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= yacht.photos.attached? ? cl_image_path(yacht.photos.first.key, width: 400, height: 300, crop: :fill): asset_path('ybnb-removebg-preview.png')  %>);">
-            <%= link_to yacht.title, yacht_path(yacht), style: "color: white; text-decoration: none;" %>
+            <%= link_to yacht.title, show_with_booking_yacht_path(yacht), style: "color: white; text-decoration: none;" %>
           </div>
+
           <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h3 style="margin: 0;"> <%= yacht.brand %> </h3>
-            <%= link_to "Book", new_yacht_booking_path(yacht), class: "btn btn-flat" %>
+            <h3 style="margin: 0;"> <%= yacht.port %> </h3>
+
           </div>
-          <div >
-              <p>  <%= yacht.port %> </p>
-          </div>
-          <div >
-              <p>  <%= yacht.description %> </p>
-          </div>
+
 
 
       </div>
     <% end %>
    </div>
-  <div id="map" style="width: 100%; "
+  <div id="map" style="width: 40%; "
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>

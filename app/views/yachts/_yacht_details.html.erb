@@ -1,0 +1,10 @@
+<div class="container-content">
+  <h1><%= @yacht.title %></h1>
+
+
+  <p>Brand: <%= @yacht.brand %></p>
+  <p>Description: <%= @yacht.description %></p>
+  <p>€ <%= @yacht.price_per_hour %> per hour</p>
+  <p>Port: <%= @yacht.port %></p>
+  <%= link_to "Back", yachts_path, class: "btn btn-flat" %>
+</div>
